@@ -1,0 +1,87 @@
+# Environment files with secrets
+.env
+.env.*
+!.env.example
+*.env
+
+# Structurizr generated/cache files
+structurizr-ws/workspace.json
+structurizr-ws/.structurizr/
+
+# Backup files
+*.backup
+*.bak
+*~
+*.tmp
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if using any tooling)
+node_modules/
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Compiled files
+*.pyc
+*.class
+*.o
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+
+# Structurizr generated files
+structurizr-ws/workspace.json
+structurizr-ws/.structurizr/
+
+# Container volumes (if using named volumes)
+.volumes/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup
+*.bak

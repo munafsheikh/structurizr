@@ -1,0 +1,17 @@
+services:
+  # -----------------------------------------------------------
+  # Diagram & Visualization Tools
+  # -----------------------------------------------------------
+
+  structurizr:
+    image: structurizr/lite:latest
+    container_name: structurizr
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./structurizr-ws:/usr/local/structurizr:Z
+    environment:
+      - STRUCTURIZR_AUTOSAVEINTERVAL=2000
+      - STRUCTURIZR_AUTOREFRESHINTERVAL=2000
+      - STRUCTURIZR_EDITABLE=true
+    restart: unless-stopped
