@@ -100,6 +100,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Big Bank plc
                   .Group-QmlnIEJhbmsgcGxj {
@@ -114,7 +115,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Big Bank plc" <<Group-QmlnIEJhbmsgcGxj>> as groupQmlnIEJhbmsgcGxj {
+                rectangle "Big Bank plc" <<Group-QmlnIEJhbmsgcGxj>> as group1 {
                   person "==Customer Service Staff\\n<size:15>[Person]</size>\\n\\nCustomer service staff within the bank." <<Element-RWxlbWVudCxQZXJzb24sQmFuayBTdGFmZg==>> as CustomerServiceStaff
                   person "==Back Office Staff\\n<size:15>[Person]</size>\\n\\nAdministration and support staff within the bank." <<Element-RWxlbWVudCxQZXJzb24sQmFuayBTdGFmZg==>> as BackOfficeStaff
                   rectangle "==Mainframe Banking System\\n<size:16>[Software System]</size>\\n\\nStores all of the core banking information about customers, accounts, transactions, etc." <<Element-RWxlbWVudCxTb2Z0d2FyZSBTeXN0ZW0sRXhpc3RpbmcgU3lzdGVt>> as MainframeBankingSystem
@@ -196,6 +197,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Big Bank plc
                   .Group-QmlnIEJhbmsgcGxj {
@@ -210,7 +212,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Big Bank plc" <<Group-QmlnIEJhbmsgcGxj>> as groupQmlnIEJhbmsgcGxj {
+                rectangle "Big Bank plc" <<Group-QmlnIEJhbmsgcGxj>> as group2 {
                   rectangle "==Mainframe Banking System\\n<size:16>[Software System]</size>\\n\\nStores all of the core banking information about customers, accounts, transactions, etc." <<Element-RWxlbWVudCxTb2Z0d2FyZSBTeXN0ZW0sRXhpc3RpbmcgU3lzdGVt>> as MainframeBankingSystem
                   rectangle "==E-mail System\\n<size:16>[Software System]</size>\\n\\nThe internal Microsoft Exchange e-mail system." <<Element-RWxlbWVudCxTb2Z0d2FyZSBTeXN0ZW0sRXhpc3RpbmcgU3lzdGVt>> as EmailSystem
                   rectangle "==Internet Banking System\\n<size:16>[Software System]</size>\\n\\nAllows customers to view information about their bank accounts, and make payments." <<Element-RWxlbWVudCxTb2Z0d2FyZSBTeXN0ZW0=>> as InternetBankingSystem
@@ -320,6 +322,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Internet Banking System
                   .Boundary-SW50ZXJuZXQgQmFua2luZyBTeXN0ZW0= {
@@ -442,6 +445,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // API Application
                   .Boundary-QVBJIEFwcGxpY2F0aW9u {
@@ -560,6 +564,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // API Application
                   .Boundary-QVBJIEFwcGxpY2F0aW9u {
@@ -678,6 +683,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element
                   .DeploymentNode-RWxlbWVudA== {
@@ -811,6 +817,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element
                   .DeploymentNode-RWxlbWVudA== {
@@ -901,6 +908,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 title <size:24>Dynamic View: Internet Banking System - API Application</size>\\n<size:24>Summarises how the sign in feature works in the single-page application.</size>
                 
                 set separator none
+                !pragma teoz true
                 hide stereotype
                 
                 <style>
@@ -951,13 +959,40 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
+                  }
+                  // API Application
+                  .Boundary-QVBJIEFwcGxpY2F0aW9u {
+                    BackgroundColor: #ffffff;
+                    LineColor: #2e6295;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #438dd5;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                  }
+                  // Internet Banking System
+                  .Boundary-SW50ZXJuZXQgQmFua2luZyBTeXN0ZW0= {
+                    BackgroundColor: #ffffff;
+                    LineColor: #0b4884;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #0b4884;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
                   }
                 </style>
                 
-                participant "Single-Page Application\\n<size:16>[Container: JavaScript and Angular]</size>" as InternetBankingSystem.SinglePageApplication <<Element-RWxlbWVudCxDb250YWluZXIsV2ViIEJyb3dzZXI=>>
-                participant "Sign In Controller\\n<size:16>[Component: Spring MVC Rest Controller]</size>" as InternetBankingSystem.APIApplication.SignInController <<Element-RWxlbWVudCxDb21wb25lbnQ=>>
-                participant "Security Component\\n<size:16>[Component: Spring Bean]</size>" as InternetBankingSystem.APIApplication.SecurityComponent <<Element-RWxlbWVudCxDb21wb25lbnQ=>>
-                database "Database\\n<size:16>[Container: Oracle Database Schema]</size>" as InternetBankingSystem.Database <<Element-RWxlbWVudCxDb250YWluZXIsRGF0YWJhc2U=>>
+                box "Internet Banking System\\n<size:16>[Software System]</size>" <<Boundary-SW50ZXJuZXQgQmFua2luZyBTeXN0ZW0=>>
+                  participant "Single-Page Application\\n<size:16>[Container: JavaScript and Angular]</size>" as InternetBankingSystem.SinglePageApplication <<Element-RWxlbWVudCxDb250YWluZXIsV2ViIEJyb3dzZXI=>>
+                  box "API Application\\n<size:16>[Container: Java and Spring MVC]</size>" <<Boundary-QVBJIEFwcGxpY2F0aW9u>>
+                    participant "Sign In Controller\\n<size:16>[Component: Spring MVC Rest Controller]</size>" as InternetBankingSystem.APIApplication.SignInController <<Element-RWxlbWVudCxDb21wb25lbnQ=>>
+                    participant "Security Component\\n<size:16>[Component: Spring Bean]</size>" as InternetBankingSystem.APIApplication.SecurityComponent <<Element-RWxlbWVudCxDb21wb25lbnQ=>>
+                  end box
+                  database "Database\\n<size:16>[Container: Oracle Database Schema]</size>" as InternetBankingSystem.Database <<Element-RWxlbWVudCxDb250YWluZXIsRGF0YWJhc2U=>>
+                end box
                 
                 InternetBankingSystem.SinglePageApplication -> InternetBankingSystem.APIApplication.SignInController <<Relationship-UmVsYXRpb25zaGlw>> : 1: Submits credentials to\\n<size:16>[JSON/HTTPS]</size>
                 InternetBankingSystem.APIApplication.SignInController -> InternetBankingSystem.APIApplication.SecurityComponent <<Relationship-UmVsYXRpb25zaGlw>> : 2: Validates credentials using
@@ -1014,6 +1049,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1054,6 +1090,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // transparent element for relationships in legend
                   .Element-Transparent {
@@ -1116,6 +1153,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #cccccc;
                     FontColor: #cccccc;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1156,6 +1194,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #cccccc;
                     FontColor: #cccccc;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // transparent element for relationships in legend
                   .Element-Transparent {
@@ -1218,6 +1257,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1275,6 +1315,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Software System A
                   .Boundary-U29mdHdhcmUgU3lzdGVtIEE= {
@@ -1346,6 +1387,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Container
                   .Boundary-Q29udGFpbmVy {
@@ -1496,6 +1538,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1558,6 +1601,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1603,6 +1647,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1637,6 +1682,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 title <size:24>Dynamic View</size>\\n<size:24>Description</size>
                 
                 set separator none
+                !pragma teoz true
                 hide stereotype
                 
                 <style>
@@ -1663,6 +1709,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1703,6 +1750,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // transparent element for relationships in legend
                   .Element-Transparent {
@@ -1745,6 +1793,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 title <size:24>Dynamic View</size>\\n<size:24>Description</size>
                 
                 set separator none
+                !pragma teoz true
                 hide stereotype
                 
                 <style>
@@ -1783,6 +1832,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -1835,6 +1885,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // transparent element for relationships in legend
                   .Element-Transparent {
@@ -1897,6 +1948,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Group 1
                   .Group-R3JvdXAgMQ== {
@@ -1933,13 +1985,13 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as groupR3JvdXAgMQ== {
+                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as group1 {
                   rectangle "==B\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as B
                 }
                 
-                rectangle "Group 2" <<Group-R3JvdXAgMg==>> as groupR3JvdXAgMg== {
+                rectangle "Group 2" <<Group-R3JvdXAgMg==>> as group2 {
                   rectangle "==C\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as C
-                    rectangle "Group 3" <<Group-R3JvdXAgMi9Hcm91cCAz>> as groupR3JvdXAgMi9Hcm91cCAz {
+                    rectangle "Group 3" <<Group-R3JvdXAgMi9Hcm91cCAz>> as group3 {
                       rectangle "==D\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as D
                     }
                 
@@ -1988,6 +2040,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // D
                   .Boundary-RA== {
@@ -2016,7 +2069,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 rectangle "==C\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as C
                 
                 rectangle "D\\n<size:16>[Software System]</size>" <<Boundary-RA==>> {
-                  rectangle "Group 4" <<Group-R3JvdXAgNA==>> as groupR3JvdXAgNA== {
+                  rectangle "Group 4" <<Group-R3JvdXAgNA==>> as group4 {
                     rectangle "==F\\n<size:16>[Container]</size>" <<Element-RWxlbWVudA==>> as D.F
                   }
                 
@@ -2063,6 +2116,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // D
                   .Boundary-RA== {
@@ -2103,7 +2157,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 
                 rectangle "D\\n<size:16>[Software System]</size>" <<Boundary-RA==>> {
                   rectangle "F\\n<size:16>[Container]</size>" <<Boundary-Rg==>> {
-                    rectangle "Group 5" <<Group-R3JvdXAgNQ==>> as groupR3JvdXAgNQ== {
+                    rectangle "Group 5" <<Group-R3JvdXAgNQ==>> as group5 {
                       rectangle "==H\\n<size:16>[Component]</size>" <<Element-RWxlbWVudA==>> as D.F.H
                     }
                 
@@ -2230,15 +2284,15 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Organisation 1" <<Group-T3JnYW5pc2F0aW9uIDE=>> as groupT3JnYW5pc2F0aW9uIDE= {
+                rectangle "Organisation 1" <<Group-T3JnYW5pc2F0aW9uIDE=>> as group1 {
                   rectangle "==Organisation 1\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Organisation1
-                    rectangle "Department 1" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAx>> as groupT3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAx {
+                    rectangle "Department 1" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAx>> as group2 {
                       rectangle "==Department 1\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Department1
-                        rectangle "Team 1" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMQ==>> as groupT3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMQ== {
+                        rectangle "Team 1" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMQ==>> as group3 {
                           rectangle "==Team 1\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Team1
                         }
                 
-                        rectangle "Team 2" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMg==>> as groupT3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMg== {
+                        rectangle "Team 2" <<Group-T3JnYW5pc2F0aW9uIDEvRGVwYXJ0bWVudCAxL1RlYW0gMg==>> as group4 {
                           rectangle "==Team 2\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Team2
                         }
                 
@@ -2246,7 +2300,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 
                 }
                 
-                rectangle "Organisation 2" <<Group-T3JnYW5pc2F0aW9uIDI=>> as groupT3JnYW5pc2F0aW9uIDI= {
+                rectangle "Organisation 2" <<Group-T3JnYW5pc2F0aW9uIDI=>> as group5 {
                   rectangle "==Organisation 2\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Organisation2
                 }
                 
@@ -2301,6 +2355,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Software System 1
                   .Boundary-U29mdHdhcmUgU3lzdGVtIDE= {
@@ -2388,6 +2443,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Container 1
                   .Boundary-Q29udGFpbmVyIDE= {
@@ -2485,6 +2541,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Container 1
                   .Boundary-Q29udGFpbmVyIDE= {
@@ -2601,6 +2658,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Software System 1
                   .Boundary-U29mdHdhcmUgU3lzdGVtIDE= {
@@ -2695,6 +2753,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Container 1
                   .Boundary-Q29udGFpbmVyIDE= {
@@ -2882,6 +2941,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                 </style>
                 
@@ -3019,6 +3079,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Group 1
                   .Group-R3JvdXAgMQ== {
@@ -3044,11 +3105,11 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as groupR3JvdXAgMQ== {
+                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as group1 {
                   rectangle "==A\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as A
                 }
                 
-                rectangle "Group 2" <<Group-R3JvdXAgMg==>> as groupR3JvdXAgMg== {
+                rectangle "Group 2" <<Group-R3JvdXAgMg==>> as group2 {
                   rectangle "==B\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as B
                 }
                 
@@ -3106,6 +3167,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // A
                   .Boundary-QQ== {
@@ -3154,14 +3216,14 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 </style>
                 
                 rectangle "A\\n<size:16>[Software System]</size>" <<Boundary-QQ==>> {
-                  rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as groupR3JvdXAgMQ== {
+                  rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as group1 {
                     rectangle "==A\\n<size:16>[Container]</size>" <<Element-RWxlbWVudA==>> as A.A
                   }
                 
                 }
                 
                 rectangle "B\\n<size:16>[Software System]</size>" <<Boundary-Qg==>> {
-                  rectangle "Group 2" <<Group-R3JvdXAgMg==>> as groupR3JvdXAgMg== {
+                  rectangle "Group 2" <<Group-R3JvdXAgMg==>> as group2 {
                     rectangle "==B\\n<size:16>[Container]</size>" <<Element-RWxlbWVudA==>> as B.B
                   }
                 
@@ -3222,6 +3284,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // A
                   .Boundary-QQ== {
@@ -3271,7 +3334,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 
                 rectangle "A\\n<size:16>[Software System]</size>" <<Boundary-QQ==>> {
                   rectangle "A\\n<size:16>[Container]</size>" <<Boundary-QQ==>> {
-                    rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as groupR3JvdXAgMQ== {
+                    rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as group1 {
                       rectangle "==A\\n<size:16>[Component]</size>" <<Element-RWxlbWVudA==>> as A.A.A
                     }
                 
@@ -3281,7 +3344,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 
                 rectangle "B\\n<size:16>[Software System]</size>" <<Boundary-Qg==>> {
                   rectangle "B\\n<size:16>[Container]</size>" <<Boundary-Qg==>> {
-                    rectangle "Group 2" <<Group-R3JvdXAgMg==>> as groupR3JvdXAgMg== {
+                    rectangle "Group 2" <<Group-R3JvdXAgMg==>> as group2 {
                       rectangle "==B\\n<size:16>[Component]</size>" <<Element-RWxlbWVudA==>> as B.B.B
                     }
                 
@@ -3376,9 +3439,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as groupR3JvdXAgMQ== {
+                rectangle "Group 1" <<Group-R3JvdXAgMQ==>> as group1 {
                   rectangle "Server 1\\n<size:16>[Deployment Node]</size>" <<DeploymentNode-RWxlbWVudA==>> as Default.Server1 {
-                    rectangle "Group 2" <<Group-R3JvdXAgMg==>> as groupR3JvdXAgMg== {
+                    rectangle "Group 2" <<Group-R3JvdXAgMg==>> as group2 {
                       rectangle "==Infrastructure Node 2\\n<size:16>[Infrastructure Node]</size>" <<Element-RWxlbWVudA==>> as Default.Server1.InfrastructureNode2
                       rectangle "==Software System\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Default.Server1.SoftwareSystem_1
                     }
@@ -3440,7 +3503,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Name" <<Group-TmFtZQ==>> as groupTmFtZQ== {
+                rectangle "Name" <<Group-TmFtZQ==>> as group1 {
                   rectangle "==Name\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Name
                 }
                 
@@ -3497,7 +3560,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                   }
                 </style>
                 
-                rectangle "Name" <<Group-TmFtZQ==>> as groupTmFtZQ== {
+                rectangle "Name" <<Group-TmFtZQ==>> as group1 {
                   rectangle "==Name\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as Name
                 }
                 
@@ -3589,6 +3652,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element,Amazon Web Services - Auto Scaling
                   .DeploymentNode-RWxlbWVudCxBbWF6b24gV2ViIFNlcnZpY2VzIC0gQXV0byBTY2FsaW5n {
@@ -3753,6 +3817,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #444444;
                     FontColor: #444444;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element,Amazon Web Services - Auto Scaling
                   .DeploymentNode-RWxlbWVudCxBbWF6b24gV2ViIFNlcnZpY2VzIC0gQXV0byBTY2FsaW5n {
@@ -3944,6 +4009,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #cccccc;
                     FontColor: #cccccc;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element,Amazon Web Services - Auto Scaling
                   .DeploymentNode-RWxlbWVudCxBbWF6b24gV2ViIFNlcnZpY2VzIC0gQXV0byBTY2FsaW5n {
@@ -4108,6 +4174,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                     LineColor: #cccccc;
                     FontColor: #cccccc;
                     FontSize: 24;
+                    MaximumWidth: 200;
                   }
                   // Element,Amazon Web Services - Auto Scaling
                   .DeploymentNode-RWxlbWVudCxBbWF6b24gV2ViIFNlcnZpY2VzIC0gQXV0byBTY2FsaW5n {
@@ -4259,6 +4326,258 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 </style>
                 
                 rectangle "==A\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as A
+                
+                @enduml""", diagram.getDefinition());
+    }
+
+    @Test
+    void sequenceDiagramsWithBoundaries() {
+        Workspace workspace = new Workspace("Name");
+        Person user = workspace.getModel().addPerson("User");
+        SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
+        Container application = softwareSystem1.addContainer("Application 1");
+        Component component1 = application.addComponent("Component 1");
+        Component component2 = application.addComponent("Component 2");
+        Container database1 = softwareSystem1.addContainer("Database 1");
+
+        SoftwareSystem softwareSystem2 = workspace.getModel().addSoftwareSystem("Software System 2");
+        Component component3 = softwareSystem2.addContainer("Application 2").addComponent("Component 3");
+        Container database2 = softwareSystem2.addContainer("Database 2");
+
+        user.uses(component1, "");
+        component1.uses(database1, "");
+        component2.uses(database1, "");
+        component1.uses(component2, "");
+        component2.uses(component3, "");
+        component3.uses(database2, "");
+
+        DynamicView dynamicView = workspace.getViews().createDynamicView(application, "key");
+        dynamicView.add(user, component1);
+        dynamicView.add(component1, database1);
+        dynamicView.add(component1, component2);
+        dynamicView.add(component2, component3);
+        dynamicView.add(component3, database2);
+
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+
+        assertEquals("""
+                @startuml
+                title <size:24>Dynamic View: Software System 1 - Application 1</size>
+                
+                set separator none
+                !pragma teoz true
+                hide stereotype
+                
+                <style>
+                  root {
+                    BackgroundColor: #ffffff;
+                    FontColor: #444444;
+                  }
+                  // Element
+                  .Element-RWxlbWVudA== {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                    MaximumWidth: 450;
+                  }
+                  // Relationship
+                  .Relationship-UmVsYXRpb25zaGlw {
+                    LineThickness: 2;
+                    LineStyle: 10-10;
+                    LineColor: #444444;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    MaximumWidth: 200;
+                  }
+                  // Application 1
+                  .Boundary-QXBwbGljYXRpb24gMQ== {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                  }
+                  // Application 2
+                  .Boundary-QXBwbGljYXRpb24gMg== {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                  }
+                  // Software System 1
+                  .Boundary-U29mdHdhcmUgU3lzdGVtIDE= {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                  }
+                  // Software System 2
+                  .Boundary-U29mdHdhcmUgU3lzdGVtIDI= {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                  }
+                </style>
+                
+                participant "User\\n<size:16>[Person]</size>" as User <<Element-RWxlbWVudA==>>
+                box "Software System 1\\n<size:16>[Software System]</size>" <<Boundary-U29mdHdhcmUgU3lzdGVtIDE=>>
+                  box "Application 1\\n<size:16>[Container]</size>" <<Boundary-QXBwbGljYXRpb24gMQ==>>
+                    participant "Component 1\\n<size:16>[Component]</size>" as SoftwareSystem1.Application1.Component1 <<Element-RWxlbWVudA==>>
+                    participant "Component 2\\n<size:16>[Component]</size>" as SoftwareSystem1.Application1.Component2 <<Element-RWxlbWVudA==>>
+                  end box
+                  participant "Database 1\\n<size:16>[Container]</size>" as SoftwareSystem1.Database1 <<Element-RWxlbWVudA==>>
+                end box
+                box "Software System 2\\n<size:16>[Software System]</size>" <<Boundary-U29mdHdhcmUgU3lzdGVtIDI=>>
+                  box "Application 2\\n<size:16>[Container]</size>" <<Boundary-QXBwbGljYXRpb24gMg==>>
+                    participant "Component 3\\n<size:16>[Component]</size>" as SoftwareSystem2.Application2.Component3 <<Element-RWxlbWVudA==>>
+                  end box
+                  participant "Database 2\\n<size:16>[Container]</size>" as SoftwareSystem2.Database2 <<Element-RWxlbWVudA==>>
+                end box
+                
+                User -> SoftwareSystem1.Application1.Component1 <<Relationship-UmVsYXRpb25zaGlw>> : 1:\s
+                SoftwareSystem1.Application1.Component1 -> SoftwareSystem1.Database1 <<Relationship-UmVsYXRpb25zaGlw>> : 2:\s
+                SoftwareSystem1.Application1.Component1 -> SoftwareSystem1.Application1.Component2 <<Relationship-UmVsYXRpb25zaGlw>> : 3:\s
+                SoftwareSystem1.Application1.Component2 -> SoftwareSystem2.Application2.Component3 <<Relationship-UmVsYXRpb25zaGlw>> : 4:\s
+                SoftwareSystem2.Application2.Component3 -> SoftwareSystem2.Database2 <<Relationship-UmVsYXRpb25zaGlw>> : 5:\s
+                
+                @enduml""", diagrams.iterator().next().getDefinition());
+
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_BOUNDARIES, "false");
+        exporter = new StructurizrPlantUMLExporter();
+        diagrams = exporter.export(workspace);
+
+        assertEquals("""
+                @startuml
+                title <size:24>Dynamic View: Software System 1 - Application 1</size>
+                
+                set separator none
+                hide stereotype
+                
+                <style>
+                  root {
+                    BackgroundColor: #ffffff;
+                    FontColor: #444444;
+                  }
+                  // Element
+                  .Element-RWxlbWVudA== {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                    MaximumWidth: 450;
+                  }
+                  // Relationship
+                  .Relationship-UmVsYXRpb25zaGlw {
+                    LineThickness: 2;
+                    LineStyle: 10-10;
+                    LineColor: #444444;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    MaximumWidth: 200;
+                  }
+                </style>
+                
+                participant "User\\n<size:16>[Person]</size>" as User <<Element-RWxlbWVudA==>>
+                participant "Component 1\\n<size:16>[Component]</size>" as SoftwareSystem1.Application1.Component1 <<Element-RWxlbWVudA==>>
+                participant "Database 1\\n<size:16>[Container]</size>" as SoftwareSystem1.Database1 <<Element-RWxlbWVudA==>>
+                participant "Component 2\\n<size:16>[Component]</size>" as SoftwareSystem1.Application1.Component2 <<Element-RWxlbWVudA==>>
+                participant "Component 3\\n<size:16>[Component]</size>" as SoftwareSystem2.Application2.Component3 <<Element-RWxlbWVudA==>>
+                participant "Database 2\\n<size:16>[Container]</size>" as SoftwareSystem2.Database2 <<Element-RWxlbWVudA==>>
+                
+                User -> SoftwareSystem1.Application1.Component1 <<Relationship-UmVsYXRpb25zaGlw>> : 1:\s
+                SoftwareSystem1.Application1.Component1 -> SoftwareSystem1.Database1 <<Relationship-UmVsYXRpb25zaGlw>> : 2:\s
+                SoftwareSystem1.Application1.Component1 -> SoftwareSystem1.Application1.Component2 <<Relationship-UmVsYXRpb25zaGlw>> : 3:\s
+                SoftwareSystem1.Application1.Component2 -> SoftwareSystem2.Application2.Component3 <<Relationship-UmVsYXRpb25zaGlw>> : 4:\s
+                SoftwareSystem2.Application2.Component3 -> SoftwareSystem2.Database2 <<Relationship-UmVsYXRpb25zaGlw>> : 5:\s
+                
+                @enduml""", diagrams.iterator().next().getDefinition());
+    }
+
+    @Test
+    void skinParamsAsViewSetProperty() {
+        Workspace workspace = new Workspace("Name");
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("A");
+        SoftwareSystem b = workspace.getModel().addSoftwareSystem("B");
+        a.uses(b, "Uses");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key");
+        view.addAllElements();
+
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SKINPARAMS_PROPERTY, "maxMessageSize=100");
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+
+        assertEquals("""
+                @startuml
+                title <size:24>System Landscape View</size>
+                
+                set separator none
+                top to bottom direction
+                hide stereotype
+                
+                skinparam {
+                  maxMessageSize 100
+                }
+                
+                <style>
+                  root {
+                    BackgroundColor: #ffffff;
+                    FontColor: #444444;
+                  }
+                  // Element
+                  .Element-RWxlbWVudA== {
+                    BackgroundColor: #ffffff;
+                    LineColor: #444444;
+                    LineStyle: 0;
+                    LineThickness: 2;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    HorizontalAlignment: center;
+                    Shadowing: 0;
+                    MaximumWidth: 450;
+                  }
+                  // Relationship
+                  .Relationship-UmVsYXRpb25zaGlw {
+                    LineThickness: 2;
+                    LineStyle: 10-10;
+                    LineColor: #444444;
+                    FontColor: #444444;
+                    FontSize: 24;
+                    MaximumWidth: 200;
+                  }
+                </style>
+                
+                rectangle "==A\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as A
+                rectangle "==B\\n<size:16>[Software System]</size>" <<Element-RWxlbWVudA==>> as B
+                
+                A --> B <<Relationship-UmVsYXRpb25zaGlw>> : "Uses"
                 
                 @enduml""", diagram.getDefinition());
     }

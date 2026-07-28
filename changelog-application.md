@@ -1,6 +1,47 @@
 # Changelog
 
-## unreleased
+## 2026.06.28
+
+### server
+
+- Fixes https://github.com/structurizr/structurizr/issues/110 ("Link to diagram" in embed diagram lead to different URL between Structurizr SaaS and Structurizr self-hosted instance).
+
+### export
+
+- Fixes https://github.com/structurizr/structurizr/issues/109 (Exporting static site with embedded themes fails when using workspace in JSON format).
+
+### generate
+
+- Fixes https://github.com/structurizr/structurizr/issues/106 ("generate system-landscape" is repeating tags).
+- Fixes https://github.com/structurizr/structurizr/issues/107 ("generate system-landscape" dropping aggregated tags).
+
+## 2026.05.22
+
+- Security updates and minor bug fixes.
+
+## 2026.05.16
+
+- Updates Structurizr for Java library to [v6.2.1](https://github.com/structurizr/structurizr/releases/tag/v6.2.1).
+
+### server
+
+- Adds an endpoint to regenerate the workspace API key (`POST /api/workspace/{workspaceId}/apikey/regenerate`).
+- Adds a [diagram level indicator](https://docs.structurizr.com/server/diagrams/viewer#diagram-level-indicator) and [diagram navigator](https://docs.structurizr.com/server/diagrams/viewer#diagram-navigator) to the diagram viewer.
+- Adds highlight.js support for code blocks in Markdown/AsciiDoc documentation and decisions.
+
+### local
+
+- Adds a [diagram level indicator](https://docs.structurizr.com/server/diagrams/viewer#diagram-level-indicator) and [diagram navigator](https://docs.structurizr.com/server/diagrams/viewer#diagram-navigator) to the diagram viewer.
+- Adds highlight.js support for code blocks in Markdown/AsciiDoc documentation and decisions.
+
+### regenerate-apikey
+
+- Adds a `regenerate-apikey` command to regenerate the API key for a server workspace.
+
+## 2026.04.19
+
+- Updates Structurizr for Java library to [v6.2.0](https://github.com/structurizr/structurizr/releases/tag/v6.2.0).
+- There are now two versions of the prebuilt binaries - see [Prebuilt binaries](https://docs.structurizr.com/binaries) for details. 
 
 ### local
 
@@ -11,10 +52,20 @@
 
 - Fixes https://github.com/structurizr/structurizr/issues/51 (window.location.hash not scrolled to on refresh).
 - Adds support for Markdown footnotes (https://github.com/structurizr/structurizr/issues/38).
+- Replaces `-` with `.` in configuration property names.
 
 ### pull
 
 - Don't create archive versions of workspace.
+
+### export
+
+- Adds support for `export -format png|svg -url <url>` - see https://docs.structurizr.com/export
+- Adds support for `export -format png|svg -workspace <file>` - see https://docs.structurizr.com/export
+
+### generate
+
+- Adds a `generate system-landscape` command - see https://docs.structurizr.com/generate.
 
 ## 2026.03.06
 

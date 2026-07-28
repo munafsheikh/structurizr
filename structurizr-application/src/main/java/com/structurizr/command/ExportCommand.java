@@ -1,7 +1,6 @@
 package com.structurizr.command;
 
 import com.structurizr.Workspace;
-import com.structurizr.documentation.Documentable;
 import com.structurizr.export.*;
 import com.structurizr.export.mermaid.MermaidDiagramExporter;
 import com.structurizr.export.plantuml.C4PlantUMLExporter;
@@ -9,7 +8,6 @@ import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
 import com.structurizr.export.websequencediagrams.WebSequenceDiagramsExporter;
 import com.structurizr.http.HttpClient;
 import com.structurizr.util.StringUtils;
-import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.ColorScheme;
 import com.structurizr.view.ThemeUtils;
 import org.apache.commons.cli.*;
@@ -18,12 +16,8 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,10 +82,6 @@ public class ExportCommand extends AbstractCommand {
         option.setRequired(false);
         options.addOption(option);
 
-        option = new Option("t", "themes", true, "Path to themes");
-        option.setRequired(false);
-        options.addOption(option);
-
         option = new Option("url", "url", true, "Structurizr diagram page URL (for PNG/SVG exports)");
         option.setRequired(false);
         options.addOption(option);
@@ -131,21 +121,29 @@ public class ExportCommand extends AbstractCommand {
         }
 
         if (PNG_FORMAT.equals(format) || SVG_FORMAT.equals(format)) {
-            if ("false".equalsIgnoreCase(System.getProperty("structurizr.playwright"))) {
-                throw new UnsupportedOperationException("Exporting to PNG/SVG is not supported in this environment");
+            // check the build includes the Playwright exporter
+            PlaywrightExporter playwrightExporter = null;
+            try {
+                Class<?> clazz = Class.forName(PlaywrightExporter.class.getName() + "Impl");
+                playwrightExporter = (PlaywrightExporter)clazz.getDeclaredConstructor().newInstance();
+            } catch (ClassNotFoundException e) {
+                log.fatal("Exporting to PNG/SVG is not supported in this build");
+                System.exit(1);
             }
 
             if (StringUtils.isNullOrEmpty(workspacePathAsString) && StringUtils.isNullOrEmpty(url)) {
-                throw new IllegalArgumentException("One of url or workspace must be provided");
+                log.fatal("One of url or workspace must be provided");
+                System.exit(1);
             }
 
-            ColorScheme colorScheme;
+            ColorScheme colorScheme = null;
             if (ColorScheme.Light.toString().equalsIgnoreCase(mode)) {
                 colorScheme = ColorScheme.Light;
             } else if (ColorScheme.Dark.toString().equalsIgnoreCase(mode)) {
                 colorScheme = ColorScheme.Dark;
             } else {
-                throw new IllegalArgumentException("Invalid mode " + mode + " - expected light or dark");
+                log.fatal("Invalid mode " + mode + " - expected light or dark");
+                System.exit(1);
             }
 
             if (!StringUtils.isNullOrEmpty(workspacePathAsString)) {
@@ -168,7 +166,8 @@ public class ExportCommand extends AbstractCommand {
                     outputDir.mkdirs();
 
                     new StaticSiteExporter().run(workspace, tempDir);
-                    new PlaywrightExporter().run("file://" + new File(tempDir, "index.html").getAbsolutePath(), format, colorScheme, animation, outputDir);
+
+                    playwrightExporter.run("file://" + new File(tempDir, "index.html").getAbsolutePath(), format, colorScheme, animation, outputDir);
                     return;
                 } catch (Exception e) {
                     log.error(e.getMessage());
@@ -182,13 +181,14 @@ public class ExportCommand extends AbstractCommand {
                 File outputDir = new File(outputPath);
                 outputDir.mkdirs();
 
-                new PlaywrightExporter().run(url, format, colorScheme, animation, outputDir);
+                playwrightExporter.run(url, format, colorScheme, animation, outputDir);
                 return;
             }
         }
 
         if (StringUtils.isNullOrEmpty(workspacePathAsString)) {
-            throw new IllegalArgumentException("The workspace path parameter must not be null or empty");
+            log.fatal("The workspace path parameter must not be null or empty");
+            System.exit(1);
         }
 
         log.info("Exporting workspace from " + workspacePathAsString);

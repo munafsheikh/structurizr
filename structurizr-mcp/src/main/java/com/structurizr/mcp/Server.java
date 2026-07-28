@@ -1,11 +1,14 @@
 package com.structurizr.mcp;
 
+import com.structurizr.util.StringUtils;
+import com.structurizr.view.ThemeUtils;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +16,14 @@ import java.util.List;
 public class Server {
 
 	private static final String DSL = "dsl";
-	private static final String SERVER = "server";
+	private static final String SERVER_CREATE = "server-create";
+	private static final String SERVER_READ = "server-read";
+	private static final String SERVER_UPDATE = "server-update";
+	private static final String SERVER_DELETE = "server-delete";
 	private static final String PLANTUML = "plantuml";
 	private static final String MERMAID = "mermaid";
+
+	private static final String THEMES_ENVIRONMENT_VARIABLE_NAME = "STRUCTURIZR_THEMES";
 
 	public static void main(String[] args) throws Exception {
 		Log log = LogFactory.getLog(Server.class);
@@ -39,7 +47,19 @@ public class Server {
 		option.setRequired(false);
 		options.addOption(option);
 
-		option = new Option(SERVER, SERVER, false, "Structurizr server tools - see https://docs.structurizr.com/server");
+		option = new Option(SERVER_CREATE, SERVER_CREATE, false, "Structurizr server create tools - see https://docs.structurizr.com/server");
+		option.setRequired(false);
+		options.addOption(option);
+
+		option = new Option(SERVER_READ, SERVER_READ, false, "Structurizr server read tools - see https://docs.structurizr.com/server");
+		option.setRequired(false);
+		options.addOption(option);
+
+		option = new Option(SERVER_UPDATE, SERVER_UPDATE, false, "Structurizr server update tools - see https://docs.structurizr.com/server");
+		option.setRequired(false);
+		options.addOption(option);
+
+		option = new Option(SERVER_DELETE, SERVER_DELETE, false, "Structurizr server delete tools - see https://docs.structurizr.com/server");
 		option.setRequired(false);
 		options.addOption(option);
 
@@ -59,8 +79,20 @@ public class Server {
 				profiles.add(DSL);
 			}
 
-			if (cmd.hasOption(SERVER)) {
-				profiles.add(SERVER);
+			if (cmd.hasOption(SERVER_CREATE)) {
+				profiles.add(SERVER_CREATE);
+			}
+
+			if (cmd.hasOption(SERVER_READ)) {
+				profiles.add(SERVER_READ);
+			}
+
+			if (cmd.hasOption(SERVER_UPDATE)) {
+				profiles.add(SERVER_UPDATE);
+			}
+
+			if (cmd.hasOption(SERVER_DELETE)) {
+				profiles.add(SERVER_DELETE);
 			}
 
 			if (cmd.hasOption(PLANTUML)) {
@@ -77,6 +109,16 @@ public class Server {
 		if (profiles.isEmpty()) {
 			log.warn("No tools were configured - configuring DSL tools");
 			profiles.add(DSL);
+		}
+
+		// load themes via the STRUCTURIZR_THEMES environment variable
+		String themesEnvironmentVariable = System.getenv(THEMES_ENVIRONMENT_VARIABLE_NAME);
+		if (!StringUtils.isNullOrEmpty(themesEnvironmentVariable)) {
+			File themesDirectory = new File(themesEnvironmentVariable);
+			if (themesDirectory.exists()) {
+				log.info("Installing themes from " + themesDirectory.getAbsolutePath());
+				ThemeUtils.installThemes(themesDirectory);
+			}
 		}
 
 		SpringApplication app = new SpringApplication(Server.class);

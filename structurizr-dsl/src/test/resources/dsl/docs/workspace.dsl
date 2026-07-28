@@ -5,10 +5,14 @@ workspace {
     model {
         user = person "User"
         softwareSystem = softwareSystem "Software System" {
-            !docs docs/softwaresystem
+            !docs docs/softwaresystem {
+                exclude "README.md"
+            }
 
             container "Container" {
-                !docs docs/softwaresystem/container
+                !docs docs/softwaresystem/container {
+                    exclude "README.*"
+                }
 
                 component "Component" {
                     !docs docs/softwaresystem/container/component/1.md

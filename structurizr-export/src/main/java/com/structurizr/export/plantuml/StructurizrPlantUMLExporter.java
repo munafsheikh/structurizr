@@ -1,6 +1,5 @@
 package com.structurizr.export.plantuml;
 
-import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.export.Legend;
 import com.structurizr.model.*;
@@ -23,6 +22,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     private Set<PlantUMLStyle> plantUMLStyles;
 
+    private int groupId = 0;
+
     public StructurizrPlantUMLExporter() {
         this(ColorScheme.Light);
     }
@@ -37,7 +38,9 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         super.writeHeader(view, writer);
 
         if (renderAsSequenceDiagram(view)) {
-            // do nothing
+            if ("true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_BOUNDARIES, "true"))) {
+                writer.writeLine("!pragma teoz true");
+            }
         } else {
             if (view.getAutomaticLayout() != null) {
                 switch (view.getAutomaticLayout().getRankDirection()) {
@@ -61,7 +64,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         writer.writeLine("hide stereotype");
 
-        writeSkinParams(writer);
+        writeSkinParams(view, writer);
 
         writer.writeLine("<style></style>");
         writer.writeLine();
@@ -140,7 +143,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                             groupName,
                             icon,
                             classSelectorForGroup(group),
-                            Base64.getEncoder().encodeToString(group.getBytes()))
+                            ++groupId)
             );
             writer.indent();
         }
@@ -285,35 +288,26 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    public Diagram export(DynamicView view) {
-        if (renderAsSequenceDiagram(view)) {
-            IndentingWriter writer = new IndentingWriter();
-            writeHeader(view, writer);
+    protected void startBoundary(DynamicView view, Element element, IndentingWriter writer) {
+        ElementStyle elementStyle = findBoundaryStyle(view, element);
+        PlantUMLBoundaryStyle plantUMLBoundaryStyle = new PlantUMLBoundaryStyle(
+                element.getName(),
+                elementStyle.getBackground(),
+                elementStyle.getColor(),
+                elementStyle.getStroke(),
+                DEFAULT_STROKE_WIDTH,
+                elementStyle.getBorder(),
+                elementStyle.getFontSize(),
+                "true".equalsIgnoreCase(elementStyle.getProperties().getOrDefault(PLANTUML_SHADOW, "false"))
+        );
+        plantUMLStyles.add(plantUMLBoundaryStyle);
 
-            Set<Element> elements = new LinkedHashSet<>();
-            for (RelationshipView relationshipView : view.getRelationships()) {
-                elements.add(relationshipView.getRelationship().getSource());
-                elements.add(relationshipView.getRelationship().getDestination());
-            }
-
-            for (Element element : elements) {
-                writeElement(view, element, writer);
-            }
-
-            if (!elements.isEmpty()) {
-                writer.writeLine();
-            }
-
-            writeRelationships(view, writer);
-            writeFooter(view, writer);
-
-            Diagram diagram = createDiagram(view, writer.toString());
-            diagram.setLegend(createLegend(view));
-
-            return diagram;
-        } else {
-            return super.export(view);
-        }
+        writer.writeLine(String.format("box \"%s\n<size:%s>%s</size>\" <<%s>>",
+                element.getName(),
+                calculateMetadataFontSize(elementStyle.getFontSize()),
+                typeOf(view, element, true),
+                plantUMLBoundaryStyle.getClassSelector()));
+        writer.indent();
     }
 
     @Override
@@ -437,7 +431,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 style.getColor(),
                 style.getStyle(),
                 renderAsSequenceDiagram(view) ? DEFAULT_STROKE_WIDTH : style.getThickness(),
-                style.getFontSize()
+                style.getFontSize(),
+                style.getWidth()
         );
         plantUMLStyles.add(plantUMLRelationshipStyle);
 
@@ -576,10 +571,6 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         writeStyles(writer);
 
         return new Legend(writer.toString());
-    }
-
-    protected boolean renderAsSequenceDiagram(ModelView view) {
-        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
     private ElementStyle findBoundaryStyle(ModelView view, Element element) {
@@ -744,6 +735,23 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 return (strokeWidth * 5) + "-" + (strokeWidth * 5);
             default:
                 return "0";
+        }
+    }
+
+    class SequenceDiagramWithBoundariesComparator implements Comparator<Element> {
+
+        private List<Element> elementsSortedByRelationshipOrder;
+
+        SequenceDiagramWithBoundariesComparator(List<Element> elementsSortedByRelationshipOrder) {
+            this.elementsSortedByRelationshipOrder = elementsSortedByRelationshipOrder;
+        }
+
+        @Override
+        public int compare(Element e1, Element e2) {
+            String parent1CanonicalName = e1.getParent() != null ? e1.getParent().getCanonicalName() : "/" + elementsSortedByRelationshipOrder.indexOf(e1);
+            String parent2CanonicalName = e2.getParent() != null ? e2.getParent().getCanonicalName() : "/" + elementsSortedByRelationshipOrder.indexOf(e2);
+
+            return parent1CanonicalName.compareTo(parent2CanonicalName);
         }
     }
 

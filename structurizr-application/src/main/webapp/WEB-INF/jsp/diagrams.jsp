@@ -25,17 +25,17 @@
         <div id="diagramControls">
             <c:choose>
                 <c:when test="${workspace.editable || embed eq true}">
-                    <div class="centered" style="padding: 20px 10px 20px 10px">
+                    <div class="centered" style="padding: 15px 5px 15px 5px">
                         <%@ include file="/WEB-INF/fragments/diagrams/controls.jspf" %>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div id="banner"></div>
                     <div class="row">
-                        <div class="col-2" style="padding: 18px 20px 10px 20px">
+                        <div class="col-2">
                             <a href="<c:out value="${urlPrefix}" /><c:out value="${urlSuffix}" escapeXml="false" />"><img src="/static/img/structurizr-banner-light.png" alt="Structurizr" class="img-light img-responsive workspaceLogo" /><img src="/static/img/structurizr-banner-dark.png" alt="Structurizr" class="img-dark img-responsive workspaceLogo" /></a>
                         </div>
-                        <div class="col-10 centered" style="padding: 20px 30px 0px 30px">
+                        <div class="col-10 centered">
                             <div class="centered">
                                 <%@ include file="/WEB-INF/fragments/diagrams/controls.jspf" %>
                             </div>
@@ -81,6 +81,7 @@
             <%@ include file="/WEB-INF/fragments/quick-navigation.jspf" %>
             <%@ include file="/WEB-INF/fragments/tooltip.jspf" %>
             <%@ include file="/WEB-INF/fragments/diagrams/navigation.jspf" %>
+            <%@ include file="/WEB-INF/fragments/diagrams/navigator.jspf" %>
 
             <div id="embeddedControls" style="text-align: right; position: absolute; bottom: 10px; right: 10px; opacity: 0.1; z-index: 100;">
                 <div class="btn-group">
@@ -105,16 +106,17 @@
                     </script>
 
                     <div class="btn-group">
-                        <button id="backEmbeddedButton" class="btn btn-default backButton" title="Go back to previous diagram"><img src="/static/bootstrap-icons/arrow-90deg-left.svg" class="icon-btn" /></button>
+                        <c:if test="${workspace.id > 0}">
+                        <button id="locationEmbeddedButton" class="btn btn-default" title="Diagram navigator"><img src="/static/bootstrap-icons/geo-alt.svg" class="icon-btn" /></button>
+                        <script nonce="${scriptNonce}">
+                            $('#locationEmbeddedButton').click(function() { openDiagramNavigator(); });
+                        </script>
+                        </c:if>
 
                         <c:if test="${workspace.id > 0 && (embed eq true && workspace.editable eq false)}">
-                            <button id="openCurrentDiagramInNewWindowEmbeddedButton" class="btn btn-default" title="Link to this diagram"><img src="/static/bootstrap-icons/link.svg" class="icon-btn" /></button>
+                        <button id="openCurrentDiagramInNewWindowEmbeddedButton" class="btn btn-default" title="Link to this diagram"><img src="/static/bootstrap-icons/link.svg" class="icon-btn" /></button>
                         </c:if>
                     </div>
-                    <script nonce="${scriptNonce}">
-                        $('#backEmbeddedButton').click(function() { back(); });
-                        $('#openCurrentDiagramInNewWindowEmbeddedButton').click(function() { openCurrentDiagramInNewWindow(); });
-                    </script>
                 </c:if>
 
                 <c:if test="${structurizrConfiguration.profile == 'Playground'}">
@@ -129,6 +131,10 @@
                 <button id="exitFullScreenButton" class="btn btn-default hidden" title="Exit Full Screen [Escape]"><img src="/static/bootstrap-icons/fullscreen-exit.svg" class="icon-btn" /></button>
 
                 <script nonce="${scriptNonce}">
+                    <c:if test="${workspace.id > 0 && (embed eq true && workspace.editable eq false)}">
+                    $('#openCurrentDiagramInNewWindowEmbeddedButton').click(function() { openCurrentDiagramInNewWindow(); });
+                    </c:if>
+
                     $('#embeddedExportButton').click(function() { exportToImages(); });
 
                     $('#zoomOutButton').click(function() { structurizr.diagram.zoomOut(); });
@@ -370,6 +376,10 @@
     function viewChanged(key) {
         $('#keyModal').modal('hide');
 
+        if (structurizr.workspace.id > 0) { // i.e. not a playground page
+            highlightViewInDiagramNavigator(key);
+        }
+
         // set the view key in the embed code modal
         $('.diagramEmbedDiagramId').text(key);
 
@@ -534,7 +544,7 @@
             // don't generate thumbnail
         } else {
             structurizr.diagram.exportCurrentThumbnailToPNG(function (thumbnail) {
-                const domId = '#diagram' + (viewKeys.indexOf(viewKey) + 1) + 'Thumbnail';
+                const domId = '.diagram' + (viewKeys.indexOf(viewKey)) + 'Thumbnail';
                 var suffix;
 
                 if (structurizr.ui.isDarkMode()) {
@@ -570,27 +580,28 @@
         }
     }
 
-    function selectDiagramByView(view)
-    {
+    function selectDiagramByView(view) {
         if (structurizr.workspace.id > 0) {
             $('.diagramThumbnail').removeClass('diagramThumbnailActive');
-            var index = 1;
+            var index = 0;
             views.forEach(function (v) {
                 if (view.key === v.key) {
-                    const thumbnail = $('#diagram' + index + 'Thumbnail');
+                    const thumbnail = $('.diagram' + index + 'Thumbnail');
                     thumbnail.addClass('diagramThumbnailActive');
                 }
                 index++;
             });
 
-            scrollActiveThumbnailIntoView();
+            setTimeout(function() {
+                scrollActiveThumbnailIntoView();
+            }, 10);
         }
     }
 
     function scrollActiveThumbnailIntoView() {
         // scroll the thumbnail into view
         var diagramNavigation = $('#diagramNavigationPanel');
-        var thumbnail = $('.diagramThumbnailActive');
+        var thumbnail = $('#diagramNavigationPanel .diagramThumbnailActive');
         if (diagramNavigation.length > 0 && thumbnail.length > 0) {
             if (thumbnail.offset().top < diagramNavigation.offset().top) {
                 thumbnail[0].scrollIntoView(true);
@@ -610,13 +621,13 @@
 
     function initThumbnails() {
         var html = '';
-        var index = 1;
+        var index = 0;
         views.forEach(function(view) {
             viewKeys.push(view.key);
-            var id = 'diagram' + index;
-            var title = structurizr.util.escapeHtml(structurizr.ui.getTitleForView(view));
+            const id = 'diagram' + index + 'Thumbnail';
+            const title = structurizr.util.escapeHtml(structurizr.ui.getTitleForView(view));
 
-            html += '<div id="' + id + 'Thumbnail" class="diagramThumbnail centered small">';
+            html += '<div class="diagramThumbnail ' + id + ' centered small">';
 
             <c:choose>
             <c:when test="${not empty param.version or embed eq true}">
@@ -628,34 +639,56 @@
             </c:otherwise>
             </c:choose>
 
-            html += '<div>';
+            html += '<div style="font-size: 14px;">';
             html += title;
-            html += '<br /><span class="small">#' + structurizr.util.escapeHtml(view.key) + '</span>';
-            html += '</div></div>';
+            html += '<div class="small">#' + structurizr.util.escapeHtml(view.key) + '</div>';
+            html += '</div>'
+
+            html += '<div class="diagramLevelWrapper">';
+            for (var i = 1; i <= 4; i++) {
+                if (view.level === i) {
+                    html += '<span class="diagramLevel diagramLevel' + i + '"></span>';
+                } else {
+                    html += '<span class="diagramLevel"></span>';
+                }
+            }
+            html += '</div>';
+
+            html += '</div>';
 
             index++;
         });
 
         $('#diagramNavigation').append(html);
 
+        renderDiagramNavigator();
+
         $('.viewThumbnail').on('error', function() {
             $(this).on('error', undefined);
             $(this).attr('src', '/static/img/thumbnail-not-available.png');
         });
 
-        index = 1;
+        index = 0;
         views.forEach(function(view) {
-            document.getElementById('diagram' + index + 'Thumbnail').onclick = function() {
+            $('.diagram' + index + 'Thumbnail').click(function() {
                 window.location.hash = encodeURIComponent(view.key);
-            };
+            });
 
             index++;
         });
     }
 
     function openCurrentDiagramInNewWindow() {
+        var prefix;
+
+        if (getParameter('link') === 'authenticated') {
+            prefix = '/workspace/' + ${workspace.id};
+        } else {
+            prefix = '<c:out value="${urlPrefix}" />';
+        }
+
         const hash = window.location.hash;
-        var url = '<c:out value="${urlPrefix}" />/diagrams<c:out value="${urlSuffix}" escapeXml="false" />';
+        var url = prefix + '/diagrams<c:out value="${urlSuffix}" escapeXml="false" />';
         var diagramIdentifier = '';
 
         if (hash === undefined || hash.trim().length === 0) {
@@ -665,7 +698,7 @@
         }
 
         const perspective = structurizr.diagram.getPerspective();
-        if (perspective.length > 0) {
+        if (perspective && perspective.length > 0) {
             if (url.indexOf('?') === -1) {
                 url = url + '?perspective=' + perspective;
             } else {
@@ -673,12 +706,14 @@
             }
         }
 
-        const tags = structurizr.diagram.getFilter().tags;
-        if (tags.length > 0) {
-            if (url.indexOf('?') === -1) {
-                url = url + '?tags=' + tags.join(',');
-            } else {
-                url = url + '&tags=' + tags.join(',');
+        if (structurizr.diagram.getFilter().active) {
+            const tags = structurizr.diagram.getFilter().tags;
+            if (tags.length > 0) {
+                if (url.indexOf('?') === -1) {
+                    url = url + '?tags=' + tags.join(',');
+                } else {
+                    url = url + '&tags=' + tags.join(',');
+                }
             }
         }
 
@@ -781,58 +816,61 @@
                 if (structurizr.diagram.currentViewIsDynamic() || structurizr.diagram.currentViewHasAnimation()) {
                     stepBackwardInAnimation();
                     e.preventDefault();
-                    return;
                 }
             } else if (e.which === dot) {
                 if (structurizr.diagram.currentViewIsDynamic() || structurizr.diagram.currentViewHasAnimation()) {
                     stepForwardInAnimation();
                     e.preventDefault();
-                    return;
                 }
             } else if (e.which === a) {
                 if (structurizr.diagram.isEditable()) {
                     structurizr.diagram.selectAllElements();
                     e.preventDefault();
-                    return;
                 }
             } else if (e.which === d) {
                 if (structurizr.diagram.isEditable() && structurizr.diagram.hasElementsSelected()) {
                     structurizr.diagram.deselectAllElements();
                     e.preventDefault();
-                    return;
                 } else {
                     structurizr.diagram.toggleDescription();
                     e.preventDefault();
-                    return;
                 }
             } else if (e.which === m) {
-                structurizr.diagram.toggleMetadata();
-                e.preventDefault();
-                return;
+                if (structurizr.diagram.isEditable() && structurizr.diagram.hasMultipleElementsSelected()) {
+                    structurizr.diagram.alignSelectedElementsMiddle();
+                    e.preventDefault();
+                } else {
+                    structurizr.diagram.toggleMetadata();
+                    e.preventDefault();
+                }
             } else if (e.which === plus || e.which === equals) {
                 structurizr.diagram.zoomIn();
                 e.preventDefault();
-                return;
             } else if (e.which === minus) {
                 structurizr.diagram.zoomOut();
                 e.preventDefault();
-                return;
             } else if (e.which === w) {
                 structurizr.diagram.zoomFitWidth();
                 e.preventDefault();
-                return;
             } else if (e.which === h) {
-                structurizr.diagram.zoomFitHeight();
-                e.preventDefault();
-                return;
+                if (structurizr.diagram.isEditable() && structurizr.diagram.hasMultipleElementsSelected()) {
+                    structurizr.diagram.distributeSelectedElementsHorizontally();
+                    e.preventDefault();
+                } else {
+                    structurizr.diagram.zoomFitHeight();
+                    e.preventDefault();
+                }
             } else if (e.which === c) {
-                structurizr.diagram.zoomFitContent();
-                e.preventDefault();
-                return;
+                if (structurizr.diagram.isEditable() && structurizr.diagram.hasMultipleElementsSelected()) {
+                    structurizr.diagram.alignSelectedElementsCentre();
+                    e.preventDefault();
+                } else {
+                    structurizr.diagram.zoomFitContent();
+                    e.preventDefault();
+                }
             } else if (e.which === u) {
                 structurizr.diagram.undo();
                 e.preventDefault();
-                return;
             } else if (e.which === n && !${embed}) {
                 const navigationIsVisible = $('#diagramNavigationPanel').is(":visible");
 
@@ -843,53 +881,73 @@
                 }
 
                 resize();
-
                 e.preventDefault();
-                return;
             } else if (e.which === r) {
-                if (structurizr.diagram.hasLinkHighlighted() && structurizr.diagram.isEditable()) {
-                    structurizr.diagram.toggleRoutingOfHighlightedLink();
-                    e.preventDefault();
-                    return;
+                if (structurizr.diagram.isEditable()) {
+                    if (structurizr.diagram.hasMultipleElementsSelected()) {
+                        structurizr.diagram.alignSelectedElementsRight();
+                        e.preventDefault();
+                    } else if (structurizr.diagram.hasLinkHighlighted()) {
+                        structurizr.diagram.toggleRoutingOfHighlightedLink();
+                        e.preventDefault();
+                    }
                 }
             } else if (e.which === j) {
                 if (structurizr.diagram.hasLinkHighlighted() && structurizr.diagram.isEditable()) {
                     structurizr.diagram.toggleJumpOfHighlightedLink();
                     e.preventDefault();
-                    return;
                 }
             } else if (e.which === v) {
-                if (structurizr.diagram.hasLinkHighlighted() && structurizr.diagram.isEditable()) {
-                    structurizr.diagram.addVertex();
-                    e.preventDefault();
-                    return;
+                if (structurizr.diagram.isEditable()) {
+                    if (structurizr.diagram.hasMultipleElementsSelected()) {
+                        structurizr.diagram.distributeSelectedElementsVertically();
+                        e.preventDefault();
+                    } else if (structurizr.diagram.hasLinkHighlighted()) {
+                        structurizr.diagram.addVertex();
+                        e.preventDefault();
+                    }
                 }
             } else if (e.which === i) {
                 if (structurizr.diagram.getCurrentView().type !== structurizr.constants.IMAGE_VIEW_TYPE) {
                     showKey();
-                    return;
                 }
             } else if (e.which === f) {
                 enterPresentationMode();
-                return;
             } else if (e.which === g) {
                 $('#filterOnButton').addClass('hidden');
                 $('#filterOffButton').removeClass('hidden');
                 openFilterModal();
-                return;
             } else if (e.which === p && !e.metaKey) {
                 openPerspectivesModal();
-                return;
             } else if (e.which === t) {
-                toggleTooltip();
-                return;
+                if (structurizr.diagram.isEditable() && structurizr.diagram.hasMultipleElementsSelected()) {
+                    structurizr.diagram.alignSelectedElementsTop();
+                    e.preventDefault();
+                } else {
+                    toggleTooltip();
+                    e.preventDefault();
+                }
             } else if (e.which === b) {
-                back();
-                return;
-            } else if (e.which === l && structurizr.diagram.isEditable()) {
-                openAutoLayoutModal();
-                e.preventDefault();
-                return;
+                if (structurizr.diagram.isEditable() && structurizr.diagram.hasMultipleElementsSelected()) {
+                    structurizr.diagram.alignSelectedElementsBottom();
+                    e.preventDefault();
+                } else {
+                    back();
+                    e.preventDefault();
+                }
+            } else if (e.which === l) {
+                if (structurizr.diagram.isEditable()) {
+                    if (structurizr.diagram.hasMultipleElementsSelected()) {
+                        structurizr.diagram.alignSelectedElementsLeft();
+                        e.preventDefault();
+                    } else {
+                        openAutoLayoutModal();
+                        e.preventDefault();
+                    }
+                } else {
+                    openDiagramNavigator();
+                    e.preventDefault();
+                }
             }
         });
     }
@@ -913,7 +971,7 @@
     }
 
     function diagramCreated() {
-        if (structurizr.workspace.id > 0) { // i.e. not a demo page
+        if (structurizr.workspace.id > 0) { // i.e. not a playground page
             initThumbnails();
         }
 
@@ -1004,7 +1062,6 @@
     function initQuickNavigation() {
         views.forEach(function(view) {
             const title = structurizr.util.escapeHtml(structurizr.ui.getTitleForView(view));
-            <%--quickNavigation.addItem(title + ' <span class="viewKey">(#' + structurizr.util.escapeHtml(view.key) + ')</span>', '<c:out value="${urlPrefix}" />/${quickNavigationPath}<c:out value="${urlSuffix}" escapeXml="false" />#' + structurizr.util.escapeHtml(view.key));--%>
             quickNavigation.addHandler(title + ' <span class="viewKey">(#' + structurizr.util.escapeHtml(view.key) + ')</span>',
             function() {
                 window.location.hash = structurizr.util.escapeHtml(view.key);
