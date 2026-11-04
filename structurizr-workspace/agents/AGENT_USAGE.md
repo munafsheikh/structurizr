@@ -10,35 +10,35 @@ The Structurizr Architect Agent is a specialized AI assistant designed to help y
 |------|---------|
 | `structurizr-architect.md` | Detailed agent specification and capabilities |
 | `structurizr-architect-agent.json` | Machine-readable agent configuration |
-| `system-prompt.md` | System prompt for Claude/LLM integration |
+| `system-prompt.md` | System prompt for LLMs integration |
 | `AGENT_USAGE.md` | This file - usage instructions |
 | `example-conversations.md` | Example interactions with the agent |
 
 ## How to Use the Agent
 
-### Option 1: Using with Claude Code (Recommended)
+### Option 1: Using with AI CLI (Recommended)
 
-If you're using Claude Code CLI:
+If you're using AI CLI:
 
 ```bash
 # Navigate to project directory
 cd /path/to/Structurizr
 
 # Start a conversation with agent context
-claude --agent agents/structurizr-architect-agent.json
+$AI_CLI --agent agents/structurizr-architect-agent.json
 
 # Or load the system prompt
-claude --system agents/system-prompt.md
+$AI_CLI --system agents/system-prompt.md
 ```
 
-### Option 2: Using with Claude Web Interface
+### Option 2: Using with AI assistant Web Interface
 
-1. **Start a new conversation** in Claude
+1. **Start a new conversation** in AI assistant
 
 2. **Provide the system prompt**:
    ```
    Copy and paste the contents of agents/system-prompt.md at the start
-   of your conversation to give Claude the specialized knowledge.
+   of your conversation to give AI assistant the specialized knowledge.
    ```
 
 3. **Provide project context**:
@@ -56,18 +56,18 @@ claude --system agents/system-prompt.md
 If integrating programmatically:
 
 ```python
-import anthropic
+import llm
 
 # Load system prompt
 with open('agents/system-prompt.md', 'r') as f:
     system_prompt = f.read()
 
 # Create client
-client = anthropic.Anthropic(api_key="your-api-key")
+client = llm.Client(api_key="your-api-key")
 
 # Start conversation
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="${LLM_MODEL}",
     max_tokens=4096,
     system=system_prompt,
     messages=[{
@@ -505,7 +505,7 @@ If you're stuck:
 
 Now that you understand how to use the agent:
 
-1. ✅ Choose your preferred method (Claude Code, Web, API)
+1. ✅ Choose your preferred method (AI CLI, Web, API)
 2. ✅ Load the system prompt or agent configuration
 3. ✅ Try a simple task (create minimal workspace)
 4. ✅ Review the output and ask questions

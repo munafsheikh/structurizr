@@ -645,7 +645,7 @@ podman compose config
 services:
   structurizr:
     environment:
-      - API_KEY=${OPENAI_API_KEY}
+      - API_KEY=${LLM_API_KEY}
       - CUSTOM_VAR=${CUSTOM_VAR:-default_value}
 ```
 
@@ -720,9 +720,7 @@ git commit -m "Remove .env from tracking"
 # 3. Create .env.example template
 cat > .env.example << 'EOF'
 # Copy this file to .env and fill in your values
-OPENAI_API_KEY=your_key_here
-ANTHROPIC_API_KEY=your_key_here
-CEREBRAS_API_KEY=your_key_here
+LLM_API_KEY=your_key_here
 EOF
 
 # 4. Rotate all exposed API keys immediately!
@@ -1025,7 +1023,7 @@ styles {
 
     # Technology-specific
     element "AI" {
-        background #10a37f  # OpenAI green
+        background #10a37f  # LLM green
     }
 
     element "Legacy" {
