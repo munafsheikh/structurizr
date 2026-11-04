@@ -4,11 +4,11 @@ This directory contains architecture documentation using [Structurizr](https://s
 
 ## 🏗️ Current Architecture: Content Scheduling System
 
-A Google Apps Script-based automation platform that intelligently schedules content using ChatGPT AI and integrates with various productivity tools.
+A Google Apps Script-based automation platform that intelligently schedules content using LLM and integrates with various productivity tools.
 
 **Key Components:**
 - **App Script Orchestrator**: Coordinates the scheduling workflow
-- **External Integrations**: Notion, Article Database, Google Calendar, ChatGPT API, Slack
+- **External Integrations**: Notion, Article Database, Google Calendar, LLM API, Slack
 - **Automated Workflow**: Gathers prompts, analyzes calendar, uses AI for optimization, and updates systems
 
 ## 📁 Project Structure

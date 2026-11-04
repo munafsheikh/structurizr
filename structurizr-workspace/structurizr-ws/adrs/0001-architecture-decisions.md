@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-We need a lightweight automation platform that can integrate with Google Workspace services (Calendar) and external APIs (Notion, ChatGPT, Slack) without requiring dedicated server infrastructure.
+We need a lightweight automation platform that can integrate with Google Workspace services (Calendar) and external APIs (Notion, LLM chat, Slack) without requiring dedicated server infrastructure.
 
 ## Decision
 
@@ -39,7 +39,7 @@ We will use Google Apps Script as the central orchestration platform for the con
 
 ---
 
-# 2. Use ChatGPT for intelligent scheduling
+# 2. Use LLM chat for intelligent scheduling
 
 Date: 2026-01-11
 
@@ -53,7 +53,7 @@ Content scheduling requires understanding context (calendar availability, conten
 
 ## Decision
 
-We will use ChatGPT API to analyze all scheduling inputs and generate an optimized content schedule.
+We will use LLM API to analyze all scheduling inputs and generate an optimized content schedule.
 
 ## Consequences
 
@@ -68,12 +68,12 @@ We will use ChatGPT API to analyze all scheduling inputs and generate an optimiz
 - **API costs**: Pay per token for each scheduling request
 - **Latency**: Network calls add execution time
 - **Non-deterministic**: May produce different results for same input
-- **Rate limits**: Subject to OpenAI API quotas
+- **Rate limits**: Subject to LLM API quotas
 - **Requires validation**: AI output needs verification
 
 ### Mitigation
 - Optimize prompts to minimize token usage
 - Implement response caching where appropriate
-- Add validation logic for ChatGPT responses
+- Add validation logic for LLM chat responses
 - Monitor API costs and usage
 - Provide fallback scheduling logic if API fails

@@ -2,7 +2,7 @@ workspace {
     !identifiers hierarchical
 
     name "Content Scheduling System"
-    description "Google App Script system for automated content scheduling using ChatGPT"
+    description "Google App Script system for automated content scheduling using LLM chat"
 
     !docs docs
     !adrs adrs
@@ -23,7 +23,7 @@ workspace {
                 notionChecker = component "Notion Checker" "Retrieves prompt updates from Notion" "Apps Script Module"
                 articleLoader = component "Article Loader" "Loads new article ideas from database" "Apps Script Module"
                 calendarRetriever = component "Calendar Retriever" "Fetches calendar entries from Google Calendar" "Apps Script Module"
-                chatgptClient = component "ChatGPT Client" "Sends data to ChatGPT and receives schedule" "Apps Script Module"
+                llm-chatClient = component "LLM chat Client" "Sends data to LLM chat and receives schedule" "Apps Script Module"
                 calendarUpdater = component "Calendar Updater" "Updates Google Calendar with new schedule" "Apps Script Module"
                 notificationSender = component "Notification Sender" "Sends Slack notifications to user" "Apps Script Module"
             }
@@ -42,7 +42,7 @@ workspace {
             tags "External"
         }
 
-        chatgpt = softwareSystem "ChatGPT API" "OpenAI's ChatGPT for intelligent scheduling" {
+        llm-chat = softwareSystem "LLM API" "LLM's LLM chat for intelligent scheduling" {
             tags "External" "AI"
         }
 
@@ -59,10 +59,10 @@ workspace {
         contentSchedulingSystem -> notion "Retrieves prompt updates from" "Notion API/HTTPS"
         contentSchedulingSystem -> articleDatabase "Loads article ideas from" "HTTPS/API"
         contentSchedulingSystem -> googleCalendar "Retrieves and updates calendar entries" "Google Calendar API/HTTPS"
-        contentSchedulingSystem -> chatgpt "Sends scheduling requests to" "OpenAI API/HTTPS"
+        contentSchedulingSystem -> llm-chat "Sends scheduling requests to" "LLM API/HTTPS"
         contentSchedulingSystem -> slack "Sends notifications via" "Slack API/HTTPS"
 
-        chatgpt -> contentSchedulingSystem "Returns scheduled content to" "HTTPS/JSON"
+        llm-chat -> contentSchedulingSystem "Returns scheduled content to" "HTTPS/JSON"
 
         # Component Relationships (workflow)
         user -> contentSchedulingSystem.appScript "Triggers scheduling workflow" "HTTPS"
@@ -71,15 +71,15 @@ workspace {
         contentSchedulingSystem.appScript.articleLoader -> articleDatabase "Retrieves article ideas" "HTTPS/REST API"
         contentSchedulingSystem.appScript.calendarRetriever -> googleCalendar "Fetches calendar entries" "Google Calendar API/HTTPS"
 
-        contentSchedulingSystem.appScript.chatgptClient -> contentSchedulingSystem.appScript.notionChecker "Gets prompts from" "Internal Call"
-        contentSchedulingSystem.appScript.chatgptClient -> contentSchedulingSystem.appScript.articleLoader "Gets article ideas from" "Internal Call"
-        contentSchedulingSystem.appScript.chatgptClient -> contentSchedulingSystem.appScript.calendarRetriever "Gets calendar data from" "Internal Call"
-        contentSchedulingSystem.appScript.chatgptClient -> chatgpt "Sends scheduling request with context" "OpenAI API/HTTPS"
+        contentSchedulingSystem.appScript.llm-chatClient -> contentSchedulingSystem.appScript.notionChecker "Gets prompts from" "Internal Call"
+        contentSchedulingSystem.appScript.llm-chatClient -> contentSchedulingSystem.appScript.articleLoader "Gets article ideas from" "Internal Call"
+        contentSchedulingSystem.appScript.llm-chatClient -> contentSchedulingSystem.appScript.calendarRetriever "Gets calendar data from" "Internal Call"
+        contentSchedulingSystem.appScript.llm-chatClient -> llm-chat "Sends scheduling request with context" "LLM API/HTTPS"
 
-        contentSchedulingSystem.appScript.calendarUpdater -> contentSchedulingSystem.appScript.chatgptClient "Receives schedule from" "Internal Call"
+        contentSchedulingSystem.appScript.calendarUpdater -> contentSchedulingSystem.appScript.llm-chatClient "Receives schedule from" "Internal Call"
         contentSchedulingSystem.appScript.calendarUpdater -> googleCalendar "Updates with scheduled articles" "Google Calendar API/HTTPS"
 
-        contentSchedulingSystem.appScript.notificationSender -> contentSchedulingSystem.appScript.chatgptClient "Gets schedule details from" "Internal Call"
+        contentSchedulingSystem.appScript.notificationSender -> contentSchedulingSystem.appScript.llm-chatClient "Gets schedule details from" "Internal Call"
         contentSchedulingSystem.appScript.notificationSender -> slack "Sends schedule notifications" "Slack Webhook/HTTPS"
         contentSchedulingSystem.appScript.notificationSender -> user "Notifies via Slack" "Slack"
     }
@@ -118,8 +118,8 @@ workspace {
             articleDatabase -> contentSchedulingSystem.appScript "Returns articles"
             contentSchedulingSystem.appScript -> googleCalendar "3. Retrieve calendar entries"
             googleCalendar -> contentSchedulingSystem.appScript "Returns calendar data"
-            contentSchedulingSystem.appScript -> chatgpt "4. Send scheduling request (prompts + articles + calendar)"
-            chatgpt -> contentSchedulingSystem.appScript "5. Returns optimized schedule"
+            contentSchedulingSystem.appScript -> llm-chat "4. Send scheduling request (prompts + articles + calendar)"
+            llm-chat -> contentSchedulingSystem.appScript "5. Returns optimized schedule"
             contentSchedulingSystem.appScript -> googleCalendar "6. Update calendar with schedule"
             contentSchedulingSystem.appScript -> slack "7. Send schedule notifications"
             slack -> user "8. Notifies user of updates"

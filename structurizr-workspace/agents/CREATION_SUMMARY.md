@@ -58,7 +58,7 @@ StructurizrDslParserException: The source element "appScript" does not exist at 
 |------|---------|------|-------|
 | **structurizr-architect.md** | Detailed agent specification | 25 KB | ~850 |
 | **structurizr-architect-agent.json** | Machine-readable config | 12 KB | ~350 |
-| **system-prompt.md** | System prompt for Claude/LLMs | 27 KB | ~900 |
+| **system-prompt.md** | System prompt for AI assistant/LLMs | 27 KB | ~900 |
 | **AGENT_USAGE.md** | How to use the agent | 18 KB | ~550 |
 | **example-conversations.md** | Realistic usage examples | 38 KB | ~1,200 |
 | **README.md** | Agent directory overview | 9 KB | ~300 |
@@ -148,7 +148,7 @@ StructurizrDslParserException: The source element "appScript" does not exist at 
 - ✅ Complete examples
 
 #### agents/system-prompt.md
-- ✅ Complete system prompt for Claude
+- ✅ Complete system prompt for AI assistant
 - ✅ Core expertise definition
 - ✅ Critical rules (hierarchical scoping)
 - ✅ Standard workflows
@@ -485,7 +485,7 @@ Development Workflow:
 4. Reference **TROUBLESHOOTING_GUIDE.md** for edge cases
 
 ### For AI-Assisted Development
-1. Load **agents/system-prompt.md** in Claude
+1. Load **agents/system-prompt.md** in AI assistant
 2. Follow **agents/AGENT_USAGE.md** patterns
 3. Reference **agents/example-conversations.md**
 4. Use agent for all DSL operations
